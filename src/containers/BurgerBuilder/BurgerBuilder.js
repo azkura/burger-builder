@@ -124,22 +124,6 @@ class BurgerBuilder extends Component {
     // {salad: true, meat: false ...}
 
     let orderSummary = null 
-
-    if( this.state.ingredients ) {
-      orderSummary = (
-        orderSummary = <OrderSummary 
-        ingredients={this.state.ingredients}
-        totalPrice={this.state.totalPrice}
-        cancelled={this.purchaseCancelHandler}
-        continued={this.purchaseContinuedHandler}/>
-  
-      )
-    }
-
-    if(this.state.loading) {
-      orderSummary = <Spinner />
-    }
-
     let burger = <Spinner />
 
     if(this.state.ingredients) {
@@ -156,6 +140,16 @@ class BurgerBuilder extends Component {
           />
         </Aux>
       )
+      orderSummary = <OrderSummary 
+        ingredients={this.state.ingredients}
+        totalPrice={this.state.totalPrice}
+        cancelled={this.purchaseCancelHandler}
+        continued={this.purchaseContinuedHandler}
+      />
+    }
+
+    if(this.state.loading) {
+      orderSummary = <Spinner />
     }
 
     return (

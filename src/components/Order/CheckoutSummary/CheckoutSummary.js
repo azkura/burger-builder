@@ -1,5 +1,5 @@
 import React from 'react'
-import classes from './CheckoutSummary'
+import classes from './CheckoutSummary.css'
 
 import Burger from '../../Burger/Burger'
 import Button from '../../UI/Button/Button'

@@ -5,6 +5,7 @@ import Button from '../../../components/UI/Button/Button'
 import Spinner from '../../../components/UI/Spinner/Spinner'
 import axios from '../../../axios-orders'
 import Input from '../../../components/UI/Input/Input'
+import { is } from '@babel/types';
 
 class ContactData extends Component {
   state = {
@@ -15,7 +16,11 @@ class ContactData extends Component {
           type: 'text',
           placeholder: 'Your Name'
         },
-        value: ''
+        value: '',
+        validation: {
+          required: true
+        },
+        valid: false
       },
       street: {
         elementType: 'input',
@@ -23,7 +28,11 @@ class ContactData extends Component {
           type: 'text',
           placeholder: 'Street'
         },
-        value: ''
+        value: '',
+        validation: {
+          required: true
+        },
+        valid: false
       },
       zipCode: {
         elementType: 'input',
@@ -31,7 +40,13 @@ class ContactData extends Component {
           type: 'text',
           placeholder: 'Your zipCode'
         },
-        value: ''
+        value: '',
+        validation: {
+          required: true,
+          minLength: 5,
+          maxLength: 5
+        },
+        valid: false
       },
       country: {
         elementType: 'input',
@@ -39,7 +54,11 @@ class ContactData extends Component {
           type: 'text',
           placeholder: 'Your Country'
         },
-        value: ''
+        value: '',
+        validation: {
+          required: true
+        },
+        valid: false
       },
       email: {
         elementType: 'input',
@@ -47,7 +66,11 @@ class ContactData extends Component {
           type: 'email',
           placeholder: 'Your Mail'
         },
-        value: ''
+        value: '',
+        validation: {
+          required: true
+        },
+        valid: false
       },
       deliveryMethod: {
         elementType: 'select',
@@ -61,6 +84,24 @@ class ContactData extends Component {
       },
     },
     loading: false
+  }
+
+  checkValidity = (value, rules) => {
+    let isValid = true
+
+    if(rules.required) {
+      isValid = value.trim() !== '' && isValid
+    }
+
+    if(rules.minLength) {
+      isValid = value.minLength >= rules.minLength && isValid
+    }
+
+    if(rules.maxLength) {
+      isValid = value.maxLength <= rules.maxLength && isValid
+    }
+
+    return isValid
   }
 
   orderHandler = (event) => {
@@ -100,6 +141,7 @@ class ContactData extends Component {
       ...updatedOrdersForm[inputIdentifier]
     }
     updatedFormElement.value = event.target.value
+    updatedFormElement.valid = this.checkValidity(updatedFormElement.value, updatedFormElement.validation)
 
     updatedOrdersForm[inputIdentifier] = updatedFormElement
     this.setState({ orderForm: updatedOrdersForm })

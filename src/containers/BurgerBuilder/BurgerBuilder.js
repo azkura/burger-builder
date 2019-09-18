@@ -6,10 +6,10 @@ import Burger from '../../components/Burger/Burger'
 import BuildControls from '../../components/Burger/BuildControls/BuildControls'
 import Modal from '../../components/UI/Modal/Modal'
 import OrderSummary from '../../components/Burger/OrderSummary/OrderSummary'
-import axios from '../../axios-orders'
 import Spinner from '../../components/UI/Spinner/Spinner'
 import withErrorHandler from '../../hoc/WithErrorHandler/WithErrorHandler'
 import * as burgerBuilderActions from '../../store/actions/index'
+import axios from '../../axios-orders'
 
 // const INGREDIENT_PRICES = {
 //   salad: 0.5,
@@ -24,18 +24,13 @@ class BurgerBuilder extends Component {
     // totalPrice: 4,
     // purchasable: false,
     purchasing: false,
-    loading: false,
-    error: false
+    // loading: false,
+    // error: false
   }
 
   componentDidMount() {
-    // console.log(this.props)
-    // axios.get('https://react-burger-builder-app-81b53.firebaseio.com/ingredients.json')
-    //   .then(response => {
-    //     this.setState({ ingredients: response.data })
-    //   }).catch(error => {
-    //     this.setState({ error: true })
-    //   })
+    console.log(this.props)
+
   }
 
   updatedPurchaseState = ingredients => {
@@ -149,9 +144,9 @@ class BurgerBuilder extends Component {
       />
     }
 
-    if(this.state.loading) {
-      orderSummary = <Spinner />
-    }
+    // if(this.state.loading) {
+    //   orderSummary = <Spinner />
+    // }
 
     return (
       <Aux>

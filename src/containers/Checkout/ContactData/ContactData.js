@@ -1,11 +1,12 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux'
+
 import classes from './ContactData.css'
 
 import Button from '../../../components/UI/Button/Button'
 import Spinner from '../../../components/UI/Spinner/Spinner'
 import axios from '../../../axios-orders'
 import Input from '../../../components/UI/Input/Input'
-import { is } from '@babel/types';
 
 class ContactData extends Component {
   state = {
@@ -45,8 +46,8 @@ class ContactData extends Component {
         value: '',
         validation: {
           required: true,
-          minLength: 5,
-          maxLength: 5
+          // minLength: 5,
+          // maxLength: 5
         },
         valid: false,
         touched: false
@@ -105,13 +106,13 @@ class ContactData extends Component {
       isValid = value.trim() !== '' && isValid
     }
 
-    if(rules.minLength) {
-      isValid = value.minLength >= rules.minLength && isValid
-    }
+    // if(rules.minLength) {
+    //   isValid = value.minLength >= rules.minLength && isValid
+    // }
 
-    if(rules.maxLength) {
-      isValid = value.maxLength <= rules.maxLength && isValid
-    }
+    // if(rules.maxLength) {
+    //   isValid = value.maxLength <= rules.maxLength && isValid
+    // }
 
     return isValid
   }
@@ -205,4 +206,11 @@ class ContactData extends Component {
   }
 }
 
-export default ContactData
+const mapStateToProps = state => {
+  return {
+    ingredients: state.ingredients,
+    price: state.totalPrice
+  }
+}
+
+export default connect(mapStateToProps)(ContactData)

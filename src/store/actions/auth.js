@@ -7,10 +7,10 @@ export const authStart = () => {
   }
 }
 
-export const authSucces = ( idToken, userId ) => {
+export const authSucces = ( token, userId ) => {
   return {
     type: actionTypes.AUTH_SUCCESS,
-    idToken: idToken,
+    idToken: token,
     userId: userId
   }
 }
@@ -61,5 +61,12 @@ export const auth = (email, password, isSignUp) => {
         console.log(error)
         dispatch(authFail(error.response.data.error))
       })
+  }
+}
+
+export const setAuthPathRedirect = (path) => {
+  return {
+    type: actionTypes.SET_AUTH_REDIRECT_PATH,
+    path: path
   }
 }

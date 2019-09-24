@@ -8,7 +8,7 @@ import Modal from '../../components/UI/Modal/Modal';
 import OrderSummary from '../../components/Burger/OrderSummary/OrderSummary';
 import Spinner from '../../components/UI/Spinner/Spinner';
 import withErrorHandler from '../../hoc/withErrorHandler/withErrorHandler';
-import * as actions from '../../store/actions/index';
+import * as actions from '../../store/actions/index'
 import axios from '../../axios-orders';
 
 class BurgerBuilder extends Component {
@@ -40,8 +40,8 @@ class BurgerBuilder extends Component {
         if (this.props.isAuthenticated) {
             this.setState( { purchasing: true } );
         } else {
-            this.props.onSetAuthRedirectPath('/checkout');
             this.props.history.push('/auth');
+            this.props.onSetAuthRedirectPath('/checkout');
         }
     }
 
